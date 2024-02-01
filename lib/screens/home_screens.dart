@@ -75,7 +75,7 @@ class HomeScreen extends StatelessWidget {
                   child: SizedBox(
                     width: size.width / 2.2,
                     height: size.height / 5,
-                    child: Image.asset('assets/images/girl_work.png'),
+                    child: Image.network('https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fgirl_work.png?alt=media&token=52c74e79-a4d0-44a8-8035-7346415dc07c'),
                   ),
                 ),
                 Positioned(
@@ -103,11 +103,11 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 children: [
                   buildRowContainers(size, 'Favorite Places',
-                      'assets/images/favorite place.png'),
+                      'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Ffavorite%20place.png?alt=media&token=4cf1b34b-5856-4e75-80b3-289277138cd6'),
                   Padding(
                     padding: EdgeInsets.only(left: size.width / 25),
                     child: buildRowContainers(
-                        size, 'Traffic Events', 'assets/images/traffic.png'),
+                        size, 'Traffic Events', 'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Ftraffic.png?alt=media&token=6107610b-9a54-407a-9f0a-c6f8595459ff'),
                   ),
                 ],
               ),
@@ -131,7 +131,7 @@ class HomeScreen extends StatelessWidget {
                   top: size.height / 20,
                   child: SizedBox(
                     width: size.width / 2.2,
-                    height: size.height / 5,
+                    height: size.height / 4,
                     child: Column(
                       children: [
                         Text(
@@ -166,7 +166,8 @@ class HomeScreen extends StatelessWidget {
                   child: SizedBox(
                     width: size.width / 2.5,
                     height: size.height / 5,
-                    child: Image.asset('assets/images/routing.png'),
+                    child: Image.network(
+                        'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Frouting.png?alt=media&token=3e1c8d72-b8a7-4dc0-8464-bb1c029d8f5a'),
                   ),
                 )
               ],
@@ -184,12 +185,12 @@ class HomeScreen extends StatelessWidget {
                               child: const MeteologyScreen()));
                     },
                     child: buildRowContainers(
-                        size, 'Meteorology', 'assets/images/meteorology.png'),
+                        size, 'Meteorology', 'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fmeteorology.png?alt=media&token=dec6e636-6209-4664-9ffe-c9da4fdd5af3'),
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: size.width / 25),
                     child: buildRowContainers(size, 'Location Service',
-                        'assets/images/location_sevice.png'),
+                        'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/profilephotos%2Flocation_sevice.png?alt=media&token=0475ffdc-8940-4b1d-a273-2a63e00d3b01'),
                   )
                 ],
               ),
@@ -213,7 +214,7 @@ class HomeScreen extends StatelessWidget {
                   child: SizedBox(
                     width: size.width / 2.2,
                     height: size.height / 5,
-                    child: Image.asset('assets/images/girl_work.png'),
+                    child: Image.network('https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fgirl_work.png?alt=media&token=52c74e79-a4d0-44a8-8035-7346415dc07c'),
                   ),
                 ),
                 Positioned(
@@ -253,11 +254,11 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 children: [
                   buildRowContainers(size, 'Citizenship Education',
-                      'assets/images/education.png'),
+                      'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Feducation.png?alt=media&token=4e557eae-78c1-4ef4-9412-6976cc843f7c'),
                   Padding(
                     padding: EdgeInsets.only(left: size.width / 25),
                     child: buildRowContainers(
-                        size, 'Property Imquiry', 'assets/images/property.png'),
+                        size, 'Property Imquiry', 'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fproperty.png?alt=media&token=50ff15c5-e7cc-4a2e-81cc-5d61e71bd093'),
                   )
                 ],
               ),
@@ -287,7 +288,7 @@ class HomeScreen extends StatelessWidget {
             child: SizedBox(
                 width: size.width / 2.9,
                 height: size.height / 7,
-                child: Image.asset(imgUrl)),
+                child: Image.network(imgUrl)),
           ),
           Padding(
             padding: EdgeInsets.only(top: size.height / 50),

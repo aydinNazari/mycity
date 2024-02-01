@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:mycity/screens/home_screens.dart';
+import 'package:mycity/screens/meteology_screen.dart';
 import 'package:mycity/screens/navigator.dart';
 
 void main() {
+  //initializeDateFormatting('tr_TR','' );
   runApp(const MyApp());
 }
 
@@ -19,7 +22,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  NavigatorScreen()
+      home:  //NavigatorScreen()
+      const MeteologyScreen()
     );
   }
 }

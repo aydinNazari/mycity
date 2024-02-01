@@ -33,7 +33,7 @@ class OneContainerHomeScreenWidget extends StatelessWidget {
           child: SizedBox(
             width: size.width / 2.2,
             height: size.height / 5,
-            child: Image.asset('assets/images/girl_work.png'),
+            child: Image.network('https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fgirl_work.png?alt=media&token=52c74e79-a4d0-44a8-8035-7346415dc07c'),
           ),
         ),
         Positioned(

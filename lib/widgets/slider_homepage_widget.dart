@@ -10,10 +10,10 @@ class SliderHomePageWidget extends StatefulWidget {
 
 class _SliderHomePageWidgetState extends State<SliderHomePageWidget> {
   List imageList = [
-    {"id": 1, "image_path": 'assets/images/os1.png'},
+    {"id": 1, "image_path": 'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fos1.png?alt=media&token=1db844f0-0cd7-42ec-b1e6-2ed7739d20fa'},
     /*{"id": 2, "image_path": 'assets/images/butcele_4.png'},*/
-    {"id": 2, "image_path": 'assets/images/os2.png'},
-    {"id": 3, "image_path": 'assets/images/os3.png'}
+    {"id": 2, "image_path": 'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fos2.png?alt=media&token=074d3174-e665-4869-a548-a981d9e65687'},
+    {"id": 3, "image_path": 'https://firebasestorage.googleapis.com/v0/b/planla.appspot.com/o/proje%20resimleri%2Fos3.png?alt=media&token=f175b0f1-35e5-4048-b9d6-3cd3d8049dc3'}
 
   ];
   final CarouselController carouselController = CarouselController();
@@ -29,7 +29,7 @@ class _SliderHomePageWidgetState extends State<SliderHomePageWidget> {
               onTap: () {},
               child: CarouselSlider(
                 items: imageList
-                    .map((item) => Image.asset(
+                    .map((item) => Image.network(
                   item['image_path'],
                   fit: BoxFit.cover,
                   width: double.infinity,

@@ -17,7 +17,6 @@ class MeteologyControls {
   var forcastData;
   var forcastDataParsed;
 
-
   List<double> temputeres = [
     20.15,
     20.18,
@@ -25,7 +24,6 @@ class MeteologyControls {
     19.00,
     18.25,
   ];
-
 
   Future<void> getLocationDataFromAPI() async {
     // print('********************************');
@@ -48,33 +46,31 @@ class MeteologyControls {
   Future<MeteologyModel> getLocationDataFromAPIByLatLon(
       BuildContext context) async {
     MeteologyModel metModel =
-        MeteologyModel(icon: '', code: '', lacation: '', tempureture: 0.0);
+        MeteologyModel(icon: '', code: '', lacation: '', tempureture: 0.0,date: '');
     Position devicePosition;
     try {
-      devicePosition=await _determinePosition();
+      devicePosition = await _determinePosition();
       locationData = await http.get(Uri.parse(
           'https://api.openweathermap.org/data/2.5/weather?lat=${devicePosition.latitude}&lon=${devicePosition.longitude}&appid=$key&units=metric'));
       final locatinDataParsed = jsonDecode(locationData.body);
+      //https://api.openweathermap.org/data/2.5/weather?lat=39.994466&lon=32.830475&appid=87d43b7c87a34b6bb94d2063a21f5da5&units=metric
 
       tempureture = locatinDataParsed['main']['temp'];
       location = locatinDataParsed['name'];
       code = locatinDataParsed['weather'][0]['main'];
       icon = locatinDataParsed['weather'][0]['icon'];
-
       metModel = MeteologyModel(
           icon: icon!,
+          date: '',
           code: code,
           lacation: location,
           tempureture: tempureture!);
-      /*print('controoolsss');
+      print('controoolsss');
       print(metModel.tempureture.toString());
       print(metModel.code);
-      print(metModel.lacation);*/
-
+      print(metModel.lacation);
     } catch (e) {
-      if (context.mounted) {
-        showSnackBar(context, e.toString(), Colors.red);
-      }
+      print(e.toString());
     }
     return metModel;
   }
@@ -98,7 +94,6 @@ class MeteologyControls {
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-
       return Future.error('Location services are disabled.');
     }
 
@@ -116,45 +111,54 @@ class MeteologyControls {
           'Location permissions are permanently denied, we cannot request permissions.');
     }
 
-
     return await Geolocator.getCurrentPosition();
   }
 
-  Future<void> getDailyForecastbyLatLon() async {
-    Position devicePosition; //try eklenmesi gerekiyor
-    devicePosition=await _determinePosition();
-    forcastData = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/forecast?lat=${devicePosition!.latitude}&lon=${devicePosition!.longitude}&appid=$key&units=metric'));
-    forcastDataParsed = jsonDecode(forcastData.body);
-    temputeres.clear();
-    icons.clear();
-    dates.clear();
+  Future<List<MeteologyModel>> getDailyForecastbyLatLon() async {
+    Position devicePosition;
+    List<MeteologyModel> metList = [];
+    try {
+      devicePosition = await _determinePosition();
+      forcastData = await http.get(Uri.parse(
+          'https://api.openweathermap.org/data/2.5/forecast?lat=${devicePosition
+              .latitude}&lon=${devicePosition
+              .longitude}&appid=$key&units=metric'));
+      forcastDataParsed = jsonDecode(forcastData.body);
 
-    for (int i = 7; i < 40; i = i + 8) {
-      temputeres.add(forcastDataParsed['list'][i]['main']['temp']);
-      icons.add(forcastDataParsed['list'][i]['weather'][0]['icon']);
-      dates.add(forcastDataParsed['list'][i]['dt_txt']);
+      for (int i = 7; i < 40; i = i + 8) {
+        MeteologyModel meteologyModel = MeteologyModel(
+            date: forcastDataParsed['list'][i]['dt_txt'],
+            icon: forcastDataParsed['list'][i]['weather'][0]['icon'],
+            code: forcastDataParsed['list'][i]['weather'][0]['main'],
+            lacation: '',
+            tempureture: forcastDataParsed['list'][i]['main']['temp']);
+        metList.add(meteologyModel);
+      }
+    } catch (e) {
+      print(e.toString());
     }
+    return metList;
   }
 
-  Future<void> getDailyForcestbyLocation() async {
-    forcastData = await http.get(Uri.parse(
-        'https://api.openweathermap.org/data/2.5/forecast?q=$location&appid=$key&units=metric'));
-    forcastDataParsed = jsonDecode(forcastData.body);
-    temputeres.clear();
-    icons.clear();
-    dates.clear();
+    Future<void> getDailyForcestbyLocation() async {
+      forcastData = await http.get(Uri.parse(
+          'https://api.openweathermap.org/data/2.5/forecast?q=$location&appid=$key&units=metric'));
+      forcastDataParsed = jsonDecode(forcastData.body);
+      temputeres.clear();
+      icons.clear();
+      dates.clear();
 
-    for (int i = 7; i < 40; i = i + 8) {
-      temputeres.add(forcastDataParsed['list'][i]['main']['temp']);
-      icons.add(forcastDataParsed['list'][i]['weather'][0]['icon']);
-      dates.add(forcastDataParsed['list'][i]['dt_txt']);
+      for (int i = 7; i < 40; i = i + 8) {
+        temputeres.add(forcastDataParsed['list'][i]['main']['temp']);
+        icons.add(forcastDataParsed['list'][i]['weather'][0]['icon']);
+        dates.add(forcastDataParsed['list'][i]['dt_txt']);
+      }
     }
-  }
 
- /* void getInitialData() async {
+    /* void getInitialData() async {
     await getDeviceLocation();
     await getLocationDataFromAPIByLatLon(); //curent wather data
     await getDailyForecastbyLatLon(); //forcest by 5days
   }*/
-}
+  }
+
